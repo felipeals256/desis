@@ -1,5 +1,5 @@
 # Requisitos
-Para iniciar el proyecto es necesario tener instalado Docker y Docker-Compose
+Para iniciar el proyecto es necesario tener instalado Docker y Docker-Compose <br>
 Este proyecto fue creado con:
 -Docker version 20.10.12, build e91ed57
 -docker-compose version 1.29.2, build unknown
