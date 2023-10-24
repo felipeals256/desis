@@ -1,0 +1,42 @@
+version: '3' # Utiliza la versión específica de Compose que prefieras. La '3.8' es una versión común con características actualizadas.
+
+services:
+  # Servicio de la aplicación PHP
+  app:
+    build: .
+    container_name: desis 
+    ports:
+      - "8000:80" # Mapeo de puertos para acceder a tu aplicación
+    volumes:
+      - ./desis_form:/var/www/html # Monta el directorio actual en el contenedor
+    depends_on:
+      - db 
+
+    networks:
+      - app-network
+
+  # Servicio de base de datos MySQL
+  db:
+    image: mysql:5.7 
+    container_name: mysql
+    
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: bdd
+      MYSQL_USER: mysql 
+      MYSQL_PASSWORD: test 
+    
+    volumes:
+      - ./db_data:/var/lib/mysql 
+      - ./mysql-init/query:/docker-entrypoint-initdb.d/
+      - ./mysql-init/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3307:3306" 
+
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
